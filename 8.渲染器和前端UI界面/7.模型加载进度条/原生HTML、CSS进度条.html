@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Three.js中文网：http://www.webgl3d.cn/</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        /* 进度条css样式 */
+        #container {
+            position: absolute;
+            width: 400px;
+            height: 16px;
+            top: 50%;
+            left:50%;
+            margin-left: -200px;
+            margin-top: -8px;
+            border-radius: 8px;           
+            border: 1px solid #009999;          
+            overflow: hidden;
+        }
+        #per {
+            height: 100%;
+            width: 0px;
+            background: #00ffff;
+            color: #00ffff;
+            line-height: 15px;          
+        }
+    </style>
+</head>
+
+<body style="background-color: #001111;">
+    <div id="container">
+        <!-- 进度条 -->
+        <div id="per"> </div>
+    </div>
+    <script>        
+        const percentDiv = document.getElementById("per");// 获取进度条元素
+        percentDiv.style.width = 0.8*400 + "px";//进度条元素长度
+        percentDiv.style.textIndent = 0.8*400 + 5 +"px";//缩进元素中的首行文本
+        percentDiv.innerHTML =  "80%";//进度百分比
+    </script>
+</body>
+
+</html>

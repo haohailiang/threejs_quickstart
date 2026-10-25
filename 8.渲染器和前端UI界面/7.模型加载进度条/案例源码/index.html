@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Three.js中文网：www.webgl3d.cn</title>
+    <style>
+        body {
+            overflow: hidden;
+            margin: 0px;
+        }
+        /* 进度条css样式 */
+        #container {
+            position: absolute;
+            width: 400px;
+            height: 16px;
+            top: 50%;
+            left: 50%;
+            margin-left: -200px;
+            margin-top: -8px;
+            border-radius: 8px;
+            border: 1px solid #009999;
+            overflow: hidden;
+        }
+        #per {
+            height: 100%;
+            width: 0px;
+            background: #00ffff;
+            color: #00ffff;
+            line-height: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <!-- 进度条 -->
+        <div id="per"> </div>
+    </div>
+    <!-- type="importmap"功能：.html文件中也能和nodejs开发环境中一样方式，引入npm安装的js库 -->
+    <script type="importmap">
+        {
+			"imports": {
+				"three": "../../../three.js/build/three.module.js",
+                "three/addons/": "../../../three.js/examples/jsm/"
+			}
+		}
+	</script>
+    <script src="./index.js" type="module">
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+# three.js 官方库文件包（体积过大，不入库，本地保留）
+/three.js/
+/three.js-r148/
+
+# Blender 备份文件
+*.blend1
+
+# 系统与编辑器
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
+
+# 依赖
+node_modules/

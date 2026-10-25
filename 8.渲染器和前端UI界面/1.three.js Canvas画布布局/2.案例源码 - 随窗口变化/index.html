@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Three.js中文网：www.webgl3d.cn</title>
+    <style>
+        body {
+            overflow: hidden;
+            margin: 0px;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body style="background: #555555;">
+    <div style="height: 55px;background-color: #444444;">上面布局</div>
+    <!-- 下 -->
+    <div>
+        <div id="left" style="position: absolute;top: 60px;background-color: #444444;width: 195px;">下面左侧布局</div>
+        <div id="webgl" style="position: absolute;top: 60px;left: 200px;background-color: #444444;"></div>
+    </div>
+    <!-- type="importmap"功能：.html文件中也能和nodejs开发环境中一样方式，引入npm安装的js库 -->
+    <script type="importmap">
+        {
+			"imports": {
+				"three": "../../../three.js/build/three.module.js",
+                "three/addons/": "../../../three.js/examples/jsm/"
+			}
+		}
+	</script>
+    <script src="./index.js" type="module">
+    </script>
+    <script>
+        const height = window.innerHeight - 60;
+        document.getElementById('left').style.height = height + 'px';
+    </script>
+</body>
+
+</html>

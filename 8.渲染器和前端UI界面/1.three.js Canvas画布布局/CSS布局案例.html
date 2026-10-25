@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Three.js中文网：www.webgl3d.cn</title>
+    <style>
+        body {
+            overflow: hidden;
+            margin: 0px;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body style="background: #555555;">
+    <div style="height: 55px;background-color: #444444;">上面布局</div>
+    <!-- 下 -->
+    <div>
+        <div id="left" style="position: absolute;top: 60px;background-color: #444444;width: 195px;">下面左侧布局</div>
+        <div id="webgl" style="position: absolute;top: 60px;left: 200px;background-color: #444444;">下面右侧布局</div>
+    </div>
+    <script>
+        const width = window.innerWidth - 200;
+        const height = window.innerHeight - 60;
+        document.getElementById('left').style.height = height + 'px';
+        // 右下角div元素宽高度计算
+        // 宽度： window.innerWidth减掉左侧div元素宽度195px和布局间距5px
+        // 高度： window.innerHeight减掉顶部div元素高度55px和布局间距5px
+        document.getElementById('webgl').style.width = width + 'px';
+        document.getElementById('webgl').style.height = height + 'px';
+
+        // 随着窗口变化
+        window.onresize = function () {
+            const width = window.innerWidth - 200;
+            const height = window.innerHeight - 60;
+            document.getElementById('left').style.height = height + 'px';
+            // 右下角div元素宽高度计算
+            // 宽度： window.innerWidth减掉左侧div元素宽度195px和布局间距5px
+            // 高度： window.innerHeight减掉顶部div元素高度55px和布局间距5px
+            document.getElementById('webgl').style.width = width + 'px';
+            document.getElementById('webgl').style.height = height + 'px';
+        };
+    </script>
+</body>
+
+
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Three.js中文网：www.webgl3d.cn</title>
+</head>
+<body>
+    <button type="button" name="button" onclick="saveFile()">下载</button>
+    <script>
+      function saveFile() {
+        // 创建一个超链接元素，用来下载保存数据的文件
+        var link = document.createElement('a');
+        // 通过超链接herf属性，设置要保存到文件中的数据
+        link.href = window.URL.createObjectURL(new Blob(['一些数据']));
+        link.download = '文件名称.txt';//下载文件名
+        link.click();//js代码触发超链接元素a的鼠标点击事件，开始下载文件到本地
+      }
+    </script>
+</body>
+</html>
