@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>案例-alphaMap透明度贴图 | 黑色部分透明</title>
+    <style>
+        body {
+            overflow: hidden;
+            margin: 0px;
+            background: #05060a;
+            font-family: "Microsoft YaHei", Arial, sans-serif;
+        }
+
+        /* 顶部使用提示 */
+        #tip {
+            position: absolute;
+            top: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 8px 18px;
+            border-radius: 20px;
+            background: rgba(0, 0, 0, 0.55);
+            color: #fff;
+            font-size: 13px;
+            letter-spacing: 1px;
+            pointer-events: none;
+            user-select: none;
+            backdrop-filter: blur(6px);
+        }
+
+        /* 左下角说明面板 */
+        #hud {
+            position: absolute;
+            left: 16px;
+            bottom: 16px;
+            padding: 10px 14px;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.55);
+            color: #b8e6ff;
+            font-size: 12px;
+            line-height: 1.8;
+            pointer-events: none;
+            user-select: none;
+            backdrop-filter: blur(6px);
+        }
+
+        #hud b {
+            color: #fff;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="tip">拖动 → 环绕观察 ｜ 滚轮 → 缩放 ｜ 右侧面板 → 调整透明度贴图</div>
+    <div id="hud"></div>
+
+    <!-- type="importmap"功能：.html文件中也能和nodejs开发环境中一样方式，引入npm安装的js库 -->
+    <script type="importmap">
+        {
+			"imports": {
+				"three": "../../three.js/build/three.module.js",
+                "three/addons/": "../../three.js/examples/jsm/"
+			}
+		}
+	</script>
+    <script src="./index.js" type="module">
+    </script>
+</body>
+
+</html>
