@@ -160,19 +160,39 @@ function showToast(text) {
 }
 
 function pick(e) {
+    // 参数面板关掉「显示景点」之后就别再响应点击了
+    // （r148 的 Raycaster 不检查 object.visible，隐藏了照样能命中，所以手动挡一下）
+    if (!parms.showHotspots) return;
+
     const rect = el.getBoundingClientRect();
     // 屏幕坐标 → NDC 标准设备坐标（-1 ~ 1），注意 y 轴要取反
     pointer.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
     pointer.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
     raycaster.setFromCamera(pointer, camera);
 
-    const hits = raycaster.intersectObjects(hotspots, false);
+    // 第二个参数要传 true：每个光点下面挂着一个「隐形拾取代理」Sprite 当点击热区，
+    // 不递归就只测光点本体（屏幕直径才 20px，几乎点不中）
+    const hits = raycaster.intersectObjects(hotspots, true);
     if (hits.length > 0) {
         const { name, lon: tLon, lat: tLat } = hits[0].object.userData;
         // 走最近的等价经度，避免绕远路（比如从 170° 转到 -170°，只该转 20°）
         let delta = ((tLon - target.lon + 540) % 360) - 180;
         target.lon = target.lon + delta;
         target.lat = tLat;
+
+        /**
+         * 【修复】点击景点后必须把自动旋转关掉
+         *
+         * render() 里有一句 `if (parms.autoRotate && !dragging) target.lon += autoRotateSpeed`，
+         * 每帧都在给 target.lon 加 0.06°。点景点时我们刚把 target.lon 设成景点的经度，
+         * 下一帧就被这句又推走了 —— 阻尼动画永远追不上一个还在跑的目标，
+         * 表现就是「镜头转过去、然后继续往同一方向滑开，停在景点上是不可能的」。
+         * 60fps 下每秒偏 3.6°，一两秒就滑出画面中心，所以看起来像"点击无效"。
+         * 拖拽时会关自动旋转，点击转向同理（要恢复自动旋转用参数面板的开关或「重置视角」）。
+         */
+        parms.autoRotate = false;
+        gui && gui.controllersRecursive().forEach((c) => c.updateDisplay());
+
         showToast('正在前往：' + name);
     }
 }

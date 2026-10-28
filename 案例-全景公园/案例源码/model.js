@@ -118,6 +118,34 @@ function createHotspot(name, lon, lat) {
     // 光点在屏幕上的大小：场景很大，用半径的比例来定尺寸才不会显得太小
     sprite.scale.setScalar(RADIUS * 0.05);
 
+    /**
+     * 【修复】给光点套一个「隐形拾取代理」
+     *
+     * 光点 scale 只有 RADIUS*0.05 = 250，在 4800 的距离上、70° fov 的屏幕里，
+     * 直径只有 20 像素左右，而且 Raycaster 对 Sprite 是严格按这个四边形边界算的 ——
+     * 鼠标允许误差几乎为 0，稍微点偏几个像素就是「完全没反应」。
+     * （之前的排查就是因为这个：几个候选点离真实中心 10~40px，全部落在边界外，
+     *   于是误判成「Raycaster 对 Sprite 失效」；实际上射线拾取一直是通的。）
+     *
+     * 解法是图形学里的常规套路：视觉物体和拾取物体分开。
+     * 这里再叠一个 3 倍大的 Sprite 当"点击热区"：
+     * - opacity: 0 + transparent → 看不见（但 visible 必须留 true，否则不参与拾取）
+     * - depthWrite/depthTest 关掉 → 不会干扰其他物体的深度关系
+     * - userData 共用同一个对象 → 命中代理就等于命中光点，pick() 里不用做兼容
+     * 作为 sprite 的子对象，它跟着光点走，也会被 scale 250 放大，
+     * 所以 local scale 写 3 就得到 750 的世界尺寸（屏幕上约 60 像素直径）。
+     */
+    const hitMaterial = new THREE.SpriteMaterial({
+        transparent: true,
+        opacity: 0,
+        depthWrite: false,
+        depthTest: false,
+    });
+    const hitArea = new THREE.Sprite(hitMaterial);
+    hitArea.scale.setScalar(3);
+    hitArea.userData = sprite.userData;
+    sprite.add(hitArea);
+
     return sprite;
 }
 
