@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>案例-视频纹理 | Three.js VideoTexture</title>
+    <style>
+        body {
+            overflow: hidden;
+            margin: 0px;
+            background: #07080a;
+            font-family: "Microsoft YaHei", Arial, sans-serif;
+        }
+
+        /* 顶部使用提示 */
+        #tip {
+            position: absolute;
+            top: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 8px 18px;
+            border-radius: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            font-size: 13px;
+            letter-spacing: 1px;
+            pointer-events: none;
+            user-select: none;
+            backdrop-filter: blur(6px);
+        }
+
+        /* 左下角信息面板 */
+        #hud {
+            position: absolute;
+            left: 16px;
+            bottom: 16px;
+            padding: 10px 14px;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            color: #b8e6ff;
+            font-size: 12px;
+            line-height: 1.8;
+            pointer-events: none;
+            user-select: none;
+            backdrop-filter: blur(6px);
+            font-variant-numeric: tabular-nums;
+        }
+
+        #hud b {
+            color: #fff;
+            font-weight: 500;
+        }
+
+        /* 自动播放被拦时的提示 */
+        #playMask {
+            position: absolute;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 14px;
+            background: rgba(0, 0, 0, 0.65);
+            color: #fff;
+            font-size: 15px;
+            cursor: pointer;
+            user-select: none;
+            z-index: 10;
+        }
+
+        #playMask.on {
+            display: flex;
+        }
+
+        #playMask .btn {
+            padding: 12px 34px;
+            border: 1px solid rgba(120, 210, 255, 0.8);
+            border-radius: 26px;
+            background: rgba(0, 120, 215, 0.35);
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="tip">鼠标拖动 → 环绕观察 ｜ 滚轮 → 缩放 ｜ 右侧面板 → 控制视频播放</div>
+    <div id="hud"></div>
+    <div id="playMask">
+        <div class="btn">点击播放视频</div>
+        <div style="font-size:12px;opacity:.7">浏览器自动播放策略拦截了视频，需要一次用户交互</div>
+    </div>
+
+    <!--
+        视频纹理的核心：一个普通的 <video> 元素，画面会被当成贴图逐帧送进显卡
+        - muted        必须静音，否则浏览器不允许自动播放
+        - playsinline  移动端不要全屏接管
+        - crossorigin  如果要贴的是别的域名的视频，必须带跨域头，否则纹理会被污染（无法上传 GPU）
+        - loop         循环播放
+        style="display:none" 只是为了不把视频显示在页面上，隐藏不影响解码和贴图
+    -->
+    <video id="video" loop muted playsinline crossorigin="anonymous" style="display:none">
+        <source src="../../three.js/examples/textures/sintel.mp4" type="video/mp4">
+    </video>
+
+    <!-- type="importmap"功能：.html文件中也能和nodejs开发环境中一样方式，引入npm安装的js库 -->
+    <script type="importmap">
+        {
+			"imports": {
+				"three": "../../three.js/build/three.module.js",
+                "three/addons/": "../../three.js/examples/jsm/"
+			}
+		}
+	</script>
+    <script src="./index.js" type="module">
+    </script>
+</body>
+
+</html>
