@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>案例-3D看房 | 点击房间切换视角</title>
+    <style>
+        body { overflow: hidden; margin: 0px; background: #0b0d12; font-family: "Microsoft YaHei", Arial, sans-serif; }
+        #tip { position: absolute; top: 16px; left: 50%; transform: translateX(-50%); padding: 8px 18px; border-radius: 20px; background: rgba(0,0,0,.55); color: #fff; font-size: 13px; letter-spacing: 1px; pointer-events: none; user-select: none; backdrop-filter: blur(6px); z-index: 5; }
+        #hud { position: absolute; left: 16px; bottom: 16px; padding: 10px 14px; border-radius: 10px; background: rgba(0,0,0,.55); color: #b8e6ff; font-size: 12px; line-height: 1.7; pointer-events: none; user-select: none; backdrop-filter: blur(6px); z-index: 5; }
+        #hud b { color: #fff; font-weight: 500; }
+        #hud code { color: #ffd88a; font-family: Consolas, monospace; }
+
+        /* ---------- 房间标识牌（CSS2DObject 的内容）---------- */
+        .room-tag { display: flex; flex-direction: column; align-items: center; gap: 4px; pointer-events: auto; cursor: pointer; user-select: none; transform: translateY(-8px); }
+        .room-tag .tag-text { padding: 6px 18px; border-radius: 18px; background: rgba(10, 16, 26, .82); color: #ffe9b8; font-size: 14px; letter-spacing: 2px; border: 1px solid rgba(255, 216, 138, .55); backdrop-filter: blur(4px); transition: background .15s; }
+        .room-tag:hover .tag-text { background: rgba(255, 177, 66, .92); color: #221a08; }
+        /* tooltip：悬停才显示 */
+        .room-tag .tag-tip { display: none; padding: 4px 12px; border-radius: 8px; background: #ffd88a; color: #221a08; font-size: 12px; white-space: nowrap; }
+        .room-tag:hover .tag-tip { display: block; }
+        .room-tag.active .tag-text { background: #ff9f43; color: #221a08; }
+    </style>
+</head>
+
+<body>
+    <div id="tip">点击房间标识牌 → 飞入该房间 ｜ 悬停标识牌 → 显示 tooltip ｜ 右上角可返回全景</div>
+    <div id="hud"></div>
+    <script type="importmap">
+        { "imports": {
+            "three": "../../three.js/build/three.module.js",
+            "three/addons/": "../../three.js/examples/jsm/"
+        } }
+    </script>
+    <script src="./index.js" type="module"></script>
+</body>
+
+</html>

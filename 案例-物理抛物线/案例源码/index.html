@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>案例-物理抛物线 | CANNON 初速度 + 重力</title>
+    <style>
+        body { overflow: hidden; margin: 0px; background: #0b0d12; font-family: "Microsoft YaHei", Arial, sans-serif; }
+        #tip { position: absolute; top: 16px; left: 50%; transform: translateX(-50%); padding: 8px 18px; border-radius: 20px; background: rgba(0,0,0,.55); color: #fff; font-size: 13px; letter-spacing: 1px; pointer-events: none; user-select: none; backdrop-filter: blur(6px); }
+        #hud { position: absolute; left: 16px; bottom: 16px; padding: 10px 14px; border-radius: 10px; background: rgba(0,0,0,.55); color: #b8e6ff; font-size: 12px; line-height: 1.7; pointer-events: none; user-select: none; backdrop-filter: blur(6px); }
+        #hud b { color: #fff; font-weight: 500; }
+        #hud code { color: #ffd88a; font-family: Consolas, monospace; }
+        #legend { position: absolute; right: 16px; bottom: 16px; padding: 10px 14px; border-radius: 10px; background: rgba(0,0,0,.55); font-size: 12px; line-height: 1.9; pointer-events: none; user-select: none; backdrop-filter: blur(6px); }
+    </style>
+</head>
+
+<body>
+    <div id="tip">右侧面板调初速度 → 点「发射」｜ 虚线 = 公式预测，黄线 = 物理引擎实际轨迹</div>
+    <div id="hud"></div>
+    <div id="legend">
+        <span style="color:#8ab4f8">┈┈ 公式预测轨迹</span><br>
+        <span style="color:#ffd23f">━━ 实际飞行轨迹</span>
+    </div>
+    <script type="importmap">
+        { "imports": {
+            "three": "../../three.js/build/three.module.js",
+            "three/addons/": "../../three.js/examples/jsm/",
+            "cannon-es": "../../libs/cannon-es.js"
+        } }
+    </script>
+    <script src="./index.js" type="module"></script>
+</body>
+
+</html>

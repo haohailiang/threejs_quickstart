@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>案例-3D看车 | 多视角切换</title>
+    <style>
+        body { overflow: hidden; margin: 0px; background: #0b0d12; font-family: "Microsoft YaHei", Arial, sans-serif; }
+        #tip { position: absolute; top: 16px; left: 50%; transform: translateX(-50%); padding: 8px 18px; border-radius: 20px; background: rgba(0,0,0,.55); color: #fff; font-size: 13px; letter-spacing: 1px; pointer-events: none; user-select: none; backdrop-filter: blur(6px); z-index: 5; }
+        #hud { position: absolute; left: 16px; bottom: 16px; padding: 10px 14px; border-radius: 10px; background: rgba(0,0,0,.55); color: #b8e6ff; font-size: 12px; line-height: 1.7; pointer-events: none; user-select: none; backdrop-filter: blur(6px); z-index: 5; }
+        #hud b { color: #fff; font-weight: 500; }
+        #hud code { color: #ffd88a; font-family: Consolas, monospace; }
+        #cams { position: absolute; left: 50%; bottom: 20px; transform: translateX(-50%); display: flex; gap: 10px; z-index: 5; }
+        #cams button { padding: 9px 20px; border-radius: 20px; border: 1px solid rgba(138,180,248,.4); background: rgba(10,16,26,.78); color: #cfe3ff; font-size: 13px; cursor: pointer; backdrop-filter: blur(6px); transition: all .15s; }
+        #cams button:hover { background: rgba(61,138,255,.85); color: #fff; }
+        #cams button.active { background: #3d8aff; color: #fff; border-color: #3d8aff; }
+        #loading { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #8ab4f8; font-size: 15px; letter-spacing: 2px; background: #0b0d12; z-index: 10; transition: opacity .5s; }
+    </style>
+</head>
+
+<body>
+    <div id="loading">模型加载中……</div>
+    <div id="tip">底部按钮切换视角 ｜ 飞行结束后可自由拖拽环绕</div>
+    <div id="cams"></div>
+    <div id="hud"></div>
+    <script type="importmap">
+        { "imports": {
+            "three": "../../three.js/build/three.module.js",
+            "three/addons/": "../../three.js/examples/jsm/"
+        } }
+    </script>
+    <script src="./index.js" type="module"></script>
+</body>
+
+</html>
